@@ -46,6 +46,35 @@ public:
 
 };
 
+
+template <typename T>
+T length(const Vec3<T>& v) {
+    return sqrt(v.norm());
+}
+
+template <typename T>
+void normalize(Vec3<T>& v) {
+    T n = v.norm();
+    if (n > 0) {
+        T factor = 1 / sqrt(n);
+        v.x *= factor, v.y *= factor, v.z *= factor;
+    }
+}
+
+template <typename T>
+T dotProduct(const Vec3<T>& a, const Vec3<T>& b)  {
+    return a.x * b.x + a.y * b.y + a.z * b.z;
+}
+
+template <typename T>
+Vec3<T> crossProduct(const Vec3<T>& a, const Vec3<T>& b) {
+    return Vec3<T>(
+            a.y * b.z - a.z * b.y,
+            a.z * b.x - a.x * b.z,
+            a.x * b.y - a.y * b.x);
+}
+
+
 int main() {
     Vec3<int> vec(1, 2, 3);
     Vec3<int> vec2(1, 2, 3);
