@@ -141,7 +141,31 @@ public:
         cp[14] = a0 * bp[2] + a1 * bp[6] + a2 * bp[10] + a3 * bp[14];
         cp[15] = a0 * bp[3] + a1 * bp[7] + a2 * bp[11] + a3 * bp[15];
 #endif
+    }
 
+    template <typename S>
+    void multVecMatrix(const Vec3<S>& src, Vec3<S>& dst) const {
+        S a, b, c, w;
+        a = src[0] * x[0][0] + src[1] * x[1][0] + src[2] * x[2][0] + x[3][0];
+        b = src[0] * x[0][1] + src[1] * x[1][1] + src[2] * x[2][1] + x[3][1];
+        c = src[0] * x[0][2] + src[1] * x[1][2] + src[2] * x[2][2] + x[3][2];
+        w = src[0] * x[0][3] + src[1] * x[1][3] + src[2] * x[2][3] + x[3][3];
+
+        dst.x = a / w;
+        dst.y = b / w;
+        dst.z = c / w;
+    }
+
+    template <typename S>
+    void multDirMatrix(const Vec3<S>& src, Vec3<S>& dst) const {
+        S a, b, c;
+        a = src[0] * x[0][0] + src[1] * x[1][0] + src[2] * x[2][0];
+        b = src[0] * x[0][1] + src[1] * x[1][1] + src[2] * x[2][1];
+        c = src[0] * x[0][2] + src[1] * x[1][2] + src[2] * x[2][2];
+
+        dst.x = a;
+        dst.y = b;
+        dst.z = c;
     }
 };
 
